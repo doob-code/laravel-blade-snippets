@@ -17,7 +17,7 @@ class BladeSnippetServiceProvider extends ServiceProvider
         // Define the custom Blade directive @endsnip
         Blade::directive('endsnip', function ($variableName) {
             return "<?php 
-                \${$variableName} = Blade::render(ob_get_clean()); 
+                \$${$variableName} = Blade::render(ob_get_clean()); 
             ?>";
         });
     }
