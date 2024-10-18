@@ -1,0 +1,26 @@
+{
+    "name": "doob-code/laravel-blade-snippets",
+    "description": "A very simple Blade directive to allow components and HTML to be rendered directly to a php variable from within a view.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "doob-code"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DoobCode\\BladeSnippets\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DoobCode\\BladeSnippets\\BladeSnippetServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "illuminate/support": "^10.0"
+    }
+}
