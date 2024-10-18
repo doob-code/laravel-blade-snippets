@@ -7,20 +7,29 @@ use Illuminate\Support\Facades\Blade;
 
 class BladeSnippetServiceProvider extends ServiceProvider
 {
+    private $variableName;
+
     public function boot()
     {
+
         // Define the custom Blade directive @snip
         Blade::directive('snip', function ($variableName) {
-            return "<?php ob_start(); ?>";
+            $variableName = trim($variableName, "\'\""); //trim the extra single quotes
+            $this->variableName = "{$variableName}";
+            return '<?php ob_start(); ?>';
         });
 
         // Define the custom Blade directive @endsnip
-        Blade::directive('endsnip', function ($variableName) {
-            return "<?php 
-                \$${$variableName} = Blade::render(ob_get_clean()); 
-            ?>";
+        Blade::directive('endsnip', function () {
+
+            if (empty($this->variableName)) {
+                throw new InvalidArgumentException('Cannot end a snip without first starting one.');
+            }
+
+            return '<?php echo $'.$this->variableName.' = Blade::render(ob_get_clean()); ?>';
         });
     }
 
 }
+
 
