@@ -26,7 +26,7 @@ class BladeSnippetServiceProvider extends ServiceProvider
                 throw new InvalidArgumentException('Cannot end a snip without first starting one.');
             }
 
-            return '<?php echo $'.$this->variableName.' = Blade::render(ob_get_clean()); ?>';
+            return '<?php echo $'.$this->variableName.' = ob_get_clean(); ?>';
         });
     }
 
